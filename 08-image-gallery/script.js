@@ -1,29 +1,52 @@
 // Ejercicio 08: Image Gallery
-// =============================
-// Objetivo: Crear una galeria de imagenes con navegacion prev/next y thumbnails clicables.
 
-// Iteration 1: Define un array de imagenes (emojis). Ejemplo:
-// const images = ['🏔️', '🌅', '🌊', '🌻', '🌌']
-// Declara una variable currentIndex = 0
+// Array de imagenes y estado
+const images = ["🏔️", "🌅", "🌊", "🌻", "🌌"];
+let currentIndex = 0;
 
+// Seleccionar elementos del DOM
+const mainDisplay = document.querySelector("#main-display");
+const mainImage = document.querySelector("#main-image");
+const prevBtn = document.querySelector("#prev-btn");
+const nextBtn = document.querySelector("#next-btn");
+const counter = document.querySelector("#counter");
+const thumbs = document.querySelectorAll(".thumb");
 
-// Iteration 2: Selecciona los elementos: "main-display", "prev-btn", "next-btn", "counter",
-// y todos los .thumb dentro de "thumbnails"
+// Actualizar la galeria con la imagen actual
+function updateGallery() {
+  // Actualizar imagen principal
+  mainDisplay.textContent = images[currentIndex];
 
+  // Actualizar fondo con el color del thumb activo
+  mainImage.style.backgroundColor = thumbs[currentIndex].style.backgroundColor;
 
-// Iteration 3: Crea una funcion "updateGallery" que:
-// - Actualice el textContent de main-display con images[currentIndex]
-// - Actualice el background del main-image con el color del thumb activo
-// - Actualice el contador con `${currentIndex + 1} / ${images.length}`
-// - Quite la clase "active" de todos los thumbs y la añada al thumb con el indice actual
+  // Actualizar contador
+  counter.textContent = `${currentIndex + 1} / ${images.length}`;
 
+  // Actualizar clase "active" en los thumbs
+  thumbs.forEach((thumb) => thumb.classList.remove("active"));
+  thumbs[currentIndex].classList.add("active");
+}
 
-// Iteration 4: Añade event listeners a los botones prev/next:
-// - next: incrementa currentIndex. Si llega al final, vuelve a 0.
-// - prev: decrementa currentIndex. Si llega a -1, va al ultimo.
-// Despues de cambiar el indice, llama a updateGallery()
+// Navegacion: siguiente (con wrap-around)
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateGallery();
+});
 
+// Navegacion: anterior (con wrap-around)
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateGallery();
+});
 
-// Iteration 5: Añade event listener a cada thumb.
-// Al hacer click, actualiza currentIndex con el data-index del thumb y llama a updateGallery()
+// Click en thumbnails
+thumbs.forEach((thumb) => {
+  thumb.addEventListener("click", () => {
+    currentIndex = Number(thumb.dataset.index);
+    updateGallery();
+  });
+});
 
+// Inicializar la galeria
+updateGallery();

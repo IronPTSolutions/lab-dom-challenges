@@ -1,28 +1,96 @@
 // Ejercicio 09: Form Validation
-// ===============================
-// Objetivo: Validar un formulario de registro en tiempo real.
 
-// Iteration 1: Selecciona el formulario "signup-form" y todos los inputs y mensajes de error.
+// Seleccionar formulario y elementos
+const form = document.querySelector("#signup-form");
+const usernameInput = document.querySelector("#username");
+const emailInput = document.querySelector("#email");
+const passwordInput = document.querySelector("#password");
+const confirmPasswordInput = document.querySelector("#confirm-password");
+const formResult = document.querySelector("#form-result");
 
+// Seleccionar mensajes de error
+const usernameError = document.querySelector("#username-error");
+const emailError = document.querySelector("#email-error");
+const passwordError = document.querySelector("#password-error");
+const confirmPasswordError = document.querySelector("#confirm-password-error");
 
-// Iteration 2: Crea funciones de validacion que reciban un valor y devuelvan un string de error
-// (vacio si es valido):
-// - validateUsername(value): minimo 3 caracteres
-// - validateEmail(value): debe contener "@" y "."
-// - validatePassword(value): minimo 6 caracteres
-// - validateConfirmPassword(value): debe coincidir con el campo password
+// Funciones de validacion (devuelven string de error o vacio si es valido)
+function validateUsername(value) {
+  if (value.length < 3) return "El nombre de usuario debe tener al menos 3 caracteres";
+  return "";
+}
 
+function validateEmail(value) {
+  if (!value.includes("@") || !value.includes(".")) return "El email debe contener '@' y '.'";
+  return "";
+}
 
-// Iteration 3: Añade event listeners "input" a cada campo.
-// Dentro del listener:
-// - Llama a la funcion de validacion correspondiente
-// - Si hay error: muestra el error en el <p> de error, añade clase "invalid" al input, quita "valid"
-// - Si es valido: limpia el <p> de error, añade clase "valid" al input, quita "invalid"
+function validatePassword(value) {
+  if (value.length < 6) return "La contraseña debe tener al menos 6 caracteres";
+  return "";
+}
 
+function validateConfirmPassword(value) {
+  if (value !== passwordInput.value) return "Las contraseñas no coinciden";
+  return "";
+}
 
-// Iteration 4: Añade un event listener "submit" al formulario.
-// - Usa event.preventDefault() para evitar el envio del formulario
-// - Valida todos los campos a la vez
-// - Si todos son validos, muestra un mensaje de exito en "form-result" con la clase "success"
-// - Si alguno falla, muestra los errores correspondientes
+// Aplicar resultado de validacion a un campo
+function applyValidation(input, errorElement, errorMessage) {
+  if (errorMessage) {
+    errorElement.textContent = errorMessage;
+    input.classList.add("invalid");
+    input.classList.remove("valid");
+  } else {
+    errorElement.textContent = "";
+    input.classList.add("valid");
+    input.classList.remove("invalid");
+  }
+}
 
+// Validacion en tiempo real
+usernameInput.addEventListener("input", () => {
+  applyValidation(usernameInput, usernameError, validateUsername(usernameInput.value));
+});
+
+emailInput.addEventListener("input", () => {
+  applyValidation(emailInput, emailError, validateEmail(emailInput.value));
+});
+
+passwordInput.addEventListener("input", () => {
+  applyValidation(passwordInput, passwordError, validatePassword(passwordInput.value));
+  // Revalidar confirmacion si ya tiene valor
+  if (confirmPasswordInput.value) {
+    applyValidation(confirmPasswordInput, confirmPasswordError, validateConfirmPassword(confirmPasswordInput.value));
+  }
+});
+
+confirmPasswordInput.addEventListener("input", () => {
+  applyValidation(confirmPasswordInput, confirmPasswordError, validateConfirmPassword(confirmPasswordInput.value));
+});
+
+// Validacion al enviar el formulario
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  // Validar todos los campos
+  const errors = [
+    { input: usernameInput, error: usernameError, message: validateUsername(usernameInput.value) },
+    { input: emailInput, error: emailError, message: validateEmail(emailInput.value) },
+    { input: passwordInput, error: passwordError, message: validatePassword(passwordInput.value) },
+    { input: confirmPasswordInput, error: confirmPasswordError, message: validateConfirmPassword(confirmPasswordInput.value) },
+  ];
+
+  // Aplicar validacion a cada campo
+  errors.forEach(({ input, error, message }) => applyValidation(input, error, message));
+
+  // Comprobar si todos son validos
+  const allValid = errors.every(({ message }) => message === "");
+
+  if (allValid) {
+    formResult.textContent = "Registro exitoso! Bienvenido, " + usernameInput.value;
+    formResult.classList.add("success");
+  } else {
+    formResult.classList.remove("success");
+  }
+});

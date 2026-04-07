@@ -1,46 +1,86 @@
 // Ejercicio 10: Shopping List con localStorage
-// ==============================================
-// Objetivo: Lista de la compra con persistencia en localStorage.
-// Los datos sobreviven al recargar la pagina.
 
-// Iteration 1: Selecciona los elementos: "item-input", "add-btn", "shopping-list", "clear-btn"
+// Seleccionar elementos del DOM
+const itemInput = document.querySelector("#item-input");
+const addBtn = document.querySelector("#add-btn");
+const shoppingList = document.querySelector("#shopping-list");
+const clearBtn = document.querySelector("#clear-btn");
 
+// Leer items de localStorage
+function getItems() {
+  const data = localStorage.getItem("shoppingList");
+  return data ? JSON.parse(data) : [];
+}
 
-// Iteration 2: Crea una funcion "getItems" que lea la lista de localStorage.
-// - Usa localStorage.getItem("shoppingList")
-// - Si existe, parsea el JSON con JSON.parse y devuelvelo
-// - Si no existe, devuelve un array vacio []
+// Guardar items en localStorage
+function saveItems(items) {
+  localStorage.setItem("shoppingList", JSON.stringify(items));
+}
 
+// Renderizar la lista completa
+function renderList() {
+  const items = getItems();
+  shoppingList.innerHTML = "";
 
-// Iteration 3: Crea una funcion "saveItems(items)" que guarde el array en localStorage.
-// - Usa localStorage.setItem("shoppingList", JSON.stringify(items))
+  items.forEach((item, index) => {
+    const li = document.createElement("li");
+    if (item.bought) li.classList.add("bought");
 
+    // Nombre del producto
+    const span = document.createElement("span");
+    span.textContent = item.name;
 
-// Iteration 4: Crea una funcion "renderList" que:
-// - Lea los items con getItems()
-// - Limpie el contenido de shopping-list (innerHTML = "")
-// - Para cada item, cree un <li> con:
-//   - Un <span> con el nombre del producto
-//   - Un boton "Comprado" (clase "toggle-btn") que alterne el estado bought
-//   - Un boton "Eliminar" (clase "delete-btn") que elimine el item
-// - Si item.bought es true, añade la clase "bought" al <li>
+    // Contenedor de acciones
+    const actions = document.createElement("div");
+    actions.classList.add("item-actions");
 
+    // Boton "Comprado"
+    const toggleBtn = document.createElement("button");
+    toggleBtn.textContent = item.bought ? "Pendiente" : "Comprado";
+    toggleBtn.classList.add("toggle-btn");
+    toggleBtn.addEventListener("click", () => {
+      const current = getItems();
+      current[index].bought = !current[index].bought;
+      saveItems(current);
+      renderList();
+    });
 
-// Iteration 5: Añade event listener al boton "add-btn":
-// - Lee el valor del input
-// - Si no esta vacio, añade un objeto { name: valor, bought: false } al array
-// - Guarda con saveItems() y renderiza con renderList()
-// - Limpia el input
+    // Boton "Eliminar"
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Eliminar";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.addEventListener("click", () => {
+      const current = getItems();
+      current.splice(index, 1);
+      saveItems(current);
+      renderList();
+    });
 
+    actions.appendChild(toggleBtn);
+    actions.appendChild(deleteBtn);
+    li.appendChild(span);
+    li.appendChild(actions);
+    shoppingList.appendChild(li);
+  });
+}
 
-// Iteration 6: Implementa las acciones de los botones "Comprado" y "Eliminar":
-// - Comprado: cambia item.bought a !item.bought, guarda y renderiza
-// - Eliminar: quita el item del array con splice, guarda y renderiza
+// Añadir nuevo producto
+addBtn.addEventListener("click", () => {
+  const value = itemInput.value.trim();
+  if (!value) return;
 
+  const items = getItems();
+  items.push({ name: value, bought: false });
+  saveItems(items);
+  renderList();
+  itemInput.value = "";
+});
 
-// Iteration 7: Añade event listener al boton "clear-btn":
-// - Vacia el array, guarda y renderiza
+// Vaciar la lista
+clearBtn.addEventListener("click", () => {
+  saveItems([]);
+  renderList();
+});
 
-
-// Iteration 8: Al cargar la pagina, llama a renderList() para mostrar los items guardados
-
+// Renderizar al cargar la pagina
+renderList();

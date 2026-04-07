@@ -1,22 +1,24 @@
 // Ejercicio 07: Accordion FAQ
-// =============================
-// Objetivo: Crear un acordeon donde solo una respuesta puede estar abierta a la vez.
 
-// Iteration 1: Selecciona todos los elementos con clase "accordion-header" usando querySelectorAll
+// Seleccionar todos los headers del acordeon
+const headers = document.querySelectorAll(".accordion-header");
 
+headers.forEach((header) => {
+  header.addEventListener("click", () => {
+    // Obtener el item padre del header clickeado
+    const currentItem = header.parentElement;
 
-// Iteration 2: Itera sobre cada header con forEach y añade un event listener "click" a cada uno.
+    // Comprobar si ya esta activo
+    const isActive = currentItem.classList.contains("active");
 
+    // Cerrar todos los items abiertos
+    document.querySelectorAll(".accordion-item").forEach((item) => {
+      item.classList.remove("active");
+    });
 
-// Iteration 3: Dentro del listener:
-// - Obtén el .accordion-item padre del header clickeado (usa .parentElement o .closest)
-// - Comprueba si ya tiene la clase "active"
-
-
-// Iteration 4: Cierra todos los accordion-items abiertos:
-// - Selecciona todos los .accordion-item y quita la clase "active" de cada uno
-
-
-// Iteration 5: Si el item clickeado NO estaba activo, añade la clase "active".
-// (Si ya estaba activo, al quitarla en la Iteration 4 ya queda cerrado)
-
+    // Si no estaba activo, abrirlo
+    if (!isActive) {
+      currentItem.classList.add("active");
+    }
+  });
+});
