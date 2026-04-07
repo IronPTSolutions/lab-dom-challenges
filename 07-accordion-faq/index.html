@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 - Accordion FAQ</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .accordion {
+      margin-top: 20px;
+    }
+
+    .accordion-item {
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 16px 20px;
+      background-color: #f8f9fa;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .accordion-header:hover {
+      background-color: #e9ecef;
+    }
+
+    .accordion-header .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-header .arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-body {
+      padding: 16px 20px;
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Accordion FAQ</h1>
+  <p>Haz click en una pregunta para ver la respuesta. Solo una respuesta puede estar abierta a la vez.</p>
+
+  <div id="accordion" class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Que es el DOM?</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p>El DOM (Document Object Model) es una representacion en forma de arbol de la estructura de un documento HTML. Permite a JavaScript acceder y manipular los elementos de la pagina.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Que es un event listener?</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p>Un event listener es una funcion que se ejecuta cuando ocurre un evento especifico en un elemento del DOM, como un click, un hover o una pulsacion de tecla.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Que diferencia hay entre querySelector y getElementById?</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p>getElementById busca un elemento por su atributo id, mientras que querySelector acepta cualquier selector CSS valido y devuelve el primer elemento que coincida.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Que es la delegacion de eventos?</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p>La delegacion de eventos es una tecnica donde se añade un solo event listener a un elemento padre en lugar de a cada hijo individual. Aprovecha el bubbling de eventos para manejar clicks en elementos hijos.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

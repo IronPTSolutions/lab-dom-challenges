@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 - Toggle Visibility</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .secret-message {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #ecf0f1;
+      border-left: 4px solid #3498db;
+      border-radius: 4px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Toggle Visibility</h1>
+  <p>Haz click en el boton para mostrar u ocultar el mensaje secreto.</p>
+
+  <button id="toggle-btn">Mostrar / Ocultar</button>
+
+  <div id="secret-message" class="secret-message hidden">
+    <p>Este es el mensaje secreto. Has conseguido mostrarlo manipulando el DOM.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

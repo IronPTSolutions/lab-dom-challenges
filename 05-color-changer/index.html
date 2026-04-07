@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Color Changer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .color-box {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      background-color: #bdc3c7;
+      transition: background-color 0.3s ease;
+    }
+
+    .palette {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .palette button {
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .palette button:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <h1>Color Changer</h1>
+  <p>Haz click en un boton de color para cambiar el fondo de la caja. Usa el boton "Random" para un color aleatorio.</p>
+
+  <div id="color-box" class="color-box">Ningun color seleccionado</div>
+
+  <div id="palette" class="palette">
+    <button data-color="#e74c3c" style="background-color: #e74c3c">Rojo</button>
+    <button data-color="#27ae60" style="background-color: #27ae60">Verde</button>
+    <button data-color="#2980b9" style="background-color: #2980b9">Azul</button>
+    <button data-color="#f39c12" style="background-color: #f39c12">Naranja</button>
+    <button data-color="#8e44ad" style="background-color: #8e44ad">Morado</button>
+    <button data-color="random" style="background-color: #34495e">Random</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

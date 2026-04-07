@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 - Shopping List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .add-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .add-form input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .add-form input:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .add-form button {
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .add-form button:hover {
+      background-color: #219a52;
+    }
+
+    #shopping-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #shopping-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+    }
+
+    #shopping-list li.bought {
+      text-decoration: line-through;
+      color: #95a5a6;
+      background-color: #eafaf1;
+    }
+
+    .item-actions button {
+      margin-left: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      color: white;
+    }
+
+    .toggle-btn {
+      background-color: #3498db;
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+
+    #clear-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    #clear-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #fef9e7;
+      border-left: 4px solid #f39c12;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #7d6608;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shopping List</h1>
+  <p>Añade productos a tu lista de la compra. Los datos se guardan en localStorage.</p>
+
+  <div class="add-form">
+    <input type="text" id="item-input" placeholder="Nuevo producto...">
+    <button id="add-btn">Añadir</button>
+  </div>
+
+  <ul id="shopping-list"></ul>
+
+  <button id="clear-btn">Vaciar lista</button>
+
+  <div class="info">
+    💡 Recarga la pagina y comprueba que tu lista sigue ahi gracias a localStorage.
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 - Dropdown Menu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .dropdown-btn:hover {
+      background-color: #8e44ad;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 5px;
+      margin-top: 5px;
+      z-index: 10;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #2c3e50;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dropdown Menu</h1>
+  <p>Haz click en el boton para abrir el menu. Haz click fuera del menu para cerrarlo.</p>
+
+  <div class="dropdown">
+    <button id="dropdown-btn" class="dropdown-btn">Menu ▼</button>
+    <div id="dropdown-menu" class="dropdown-menu hidden">
+      <a href="#">Perfil</a>
+      <a href="#">Configuracion</a>
+      <a href="#">Mis pedidos</a>
+      <a href="#">Cerrar sesion</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

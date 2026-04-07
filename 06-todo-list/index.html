@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 - TODO List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    #add-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #add-btn:hover {
+      background-color: #219a52;
+    }
+
+    #todo-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    #todo-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    #todo-list li.completed {
+      text-decoration: line-through;
+      color: #95a5a6;
+      background-color: #eafaf1;
+    }
+
+    .todo-actions button {
+      margin-left: 8px;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      color: white;
+    }
+
+    .complete-btn {
+      background-color: #3498db;
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+
+    .empty-message {
+      color: #95a5a6;
+      font-style: italic;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TODO List</h1>
+  <p>Pulsa el boton para añadir tareas. Puedes marcarlas como completadas o eliminarlas.</p>
+
+  <button id="add-btn">+ Añadir tarea</button>
+
+  <ul id="todo-list"></ul>
+
+  <p id="empty-message" class="empty-message">No hay tareas. Añade una nueva tarea.</p>
+
+  <script src="script.js"></script>
+</body>
+</html>
